@@ -1,23 +1,32 @@
 <template>
-  <v-app>
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+  <v-app class="">
+    <v-main><Home /></v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Home from "../src/views/Home.vue"
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    HelloWorld,
+    Home
   },
-
   data: () => ({
     //
   }),
-}
+};
 </script>
+
+<style>
+html {
+  overflow: hidden !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+</style>

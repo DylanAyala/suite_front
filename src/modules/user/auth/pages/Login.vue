@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="login-bg login-blur fill-height">
+  <v-container fluid class="login-bg login-blur fill-height pa-0">
     <v-row class="pt-16 login-blur" justify="center">
       <v-col cols="6" sm="10" md="6" xl="4" :rounded="0" class="pa-0">
         <v-card :rounded="0" class="elevation-12 card-bg rounded-l-lg alto"> </v-card>

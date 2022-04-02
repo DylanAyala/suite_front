@@ -1,4 +1,4 @@
-# suite_front
+# suite_front!
 
 ## Project setup
 ```

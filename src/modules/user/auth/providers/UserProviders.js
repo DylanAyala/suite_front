@@ -1,36 +1,25 @@
-import gql from "graphql-tag"
-import graphqlClient from '../../../../apollo'
+import gql from "graphql-tag";
+import graphqlClient from "../../../../apollo";
 
 class UserProvider {
-    auth(username, password) {
-        return graphqlClient.mutate({
-            mutation: gql`
-                mutation ($username:String!, $password:String!){
-                    auth(username:$username, password:$password){
-                        token
-                        user{
-                            id
-                            username
-                            firstName
-                            email
-                            dateJoined
-                            groups{
-                                id
-                                name
-                            }
-                            isActive
-                            lenguage
-                            country
-                        }
-                    }
-                }
-            `,
-            variables: {
-                username,
-                password
+  auth(username, password) {
+    return graphqlClient.mutate({
+      mutation: gql`
+        mutation {
+          auth(input: { username: "admin", password: "123" }) {
+            token
+            user {
+              id
             }
-        })
-    }
+          }
+        }
+      `,
+      variables: {
+        username,
+        password,
+      },
+    });
+  }
 }
 
-export default new UserProvider()
+export default new UserProvider();

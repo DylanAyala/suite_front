@@ -1,14 +1,25 @@
 <template>
-  <v-container fluid class="login-bg login-blur fill-height pa-0">
-    <v-row class="pt-16 login-blur" justify="center">
-      <v-col cols="6" sm="10" md="6" xl="4" :rounded="0" class="pa-0">
-        <v-card :rounded="0" class="elevation-12 card-bg rounded-l-lg alto"> </v-card>
+  <v-container fluid class="login-bg login-blur fill-height">
+    <v-row class="login-blur" align="center" justify="center">
+      <v-col cols="6" sm="10" md="6" xl="4" class="pa-0">
+        <div class="card-bg"></div>
       </v-col>
       <v-col cols="6" sm="10" md="6" xl="4" :rounded="0" class="pa-0">
-        <v-card class="elevation-12 pa-8 rounded-r-lg alto" :rounded="0">
+        <v-card class="elevation-12 pa-8 rounded-lg alto" :rounded="0">
           <v-toolbar color="#ffffff" style="height: 100px">
             <v-row class="">
-              <v-col cols="12" class="pa-0 title-logo" align="center"> </v-col>
+              <v-col cols="12" class="pa-0" align="center"
+                ><h1
+                  class="
+                    welcome-text
+                    font-weight-bold
+                    text-decoration-underline
+                  "
+                >
+                  WELCOME!
+                </h1>
+                <p></p
+              ></v-col>
             </v-row>
           </v-toolbar>
           <v-card-text class="pb-1">
@@ -41,7 +52,7 @@
               ></v-text-field>
             </v-form>
           </v-card-text>
-          <v-card-actions class="pt-1">
+          <v-card-actions class="pt-1" align="center" justify="center">
             <v-row class="">
               <v-col
                 cols="6"
@@ -55,25 +66,56 @@
                   style="background-color: #01579b"
                   min-width="100%"
                   @click="auth"
-                  class="rounded-l-xl elevation-2 button-login"
+                  class="rounded-l-xl elevation-6 button-login-havas"
                 >
                   <!--<v-img src="../components/assets/logo-havas-blue.svg"></v-img>-->
-                  <p class="text-white">havas login</p>
+                  <p class="text-white login-text">havas login</p>
                 </v-btn>
               </v-col>
               <v-col cols="6" class="py-1 text-center pl-0">
                 <v-btn
                   :rounded="0"
-                  class="rounded-r-xl elevation-1 button-login"
+                  class="rounded-r-xl elevation-4 button-request-access"
                   @click="auth"
                   min-width="100%"
-                  ><p style="color: #01579b">Login</p></v-btn
+                  ><p style="color: #01579b" class="login-text">
+                    Request Access
+                  </p></v-btn
+                >
+              </v-col>
+              <v-col cols="12" class="py-1 text-center mt-2">
+                <v-btn
+                  class="rounded-xl elevation-6 button-login-2"
+                  @click="auth"
+                  min-width="100%"
+                  style="background-color: #01579b"
+                  ><p class="login-text-2">LogIn</p></v-btn
                 >
               </v-col>
             </v-row>
           </v-card-actions>
+
+          <v-row align="center" justify="center" class="mt-12">
+            <v-col cols="12" class="pa-0 title-logo"></v-col>
+          </v-row>
         </v-card>
       </v-col>
+      <v-snackbar
+        v-model="snackbar"
+        timeout="10000"
+        color="red-darken-2"
+        vertical
+      >
+        <div class="text-subtitle-1 pb-2">Error into LogIn</div>
+
+        <p>Invalid email or password</p>
+
+        <template v-slot:actions>
+          <v-btn color="white" variant="text" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-row>
   </v-container>
 </template>
@@ -89,6 +131,7 @@ export default {
         password: "",
       },
       valid: false,
+      snackbar: false,
       nameRules: [(v) => !!v || "Name is required"],
       passRules: [(v) => !!v || "Password is required"],
       pass: false,
@@ -103,31 +146,52 @@ export default {
       if (this.$refs.form.validate()) {
         this.login(this.form);
       }
+      if (this.getUserInvalid === false) {
+        this.snackbar = true;
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+.welcome-text {
+  color: #01579b;
+  font-size: 48px;
+}
 .alto {
-  height: 800px;
+  height: 600px;
 }
 .login-blur {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
   height: 100vh;
 }
+.login-text {
+  font-family: "Closeness", Helvetica, Arial;
+  font-size: 14px;
+}
+.login-text-2 {
+  font-family: "Closeness", Helvetica, Arial;
+  font-size: 16px;
+  color: white;
+}
 .login-bg {
-  background-image: url("../components/assets/fondo-login.jpg") !important;
+  background-image: url("../components/assets/fondo-login-blur.jpg") !important;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
   width: 100%;
 }
 .card-bg {
-  background-image: url("../components/assets/blue.jpg") !important;
+  background-image: url("../components/assets/no-activados-img1b.png") !important;
   background-size: cover;
   background-position: right;
+  height: 500px;
+}
+.card-bg-2 {
+  background-image: url("../components/assets/no-activados-img2b.png") !important;
+  background-size: cover;
+  background-position: right;
+  height: 500px;
 }
 .title-logo {
   background-image: url("../components/assets/mx-logo-blue-full.svg");
@@ -135,8 +199,12 @@ export default {
   background-position: center;
   width: 200px;
   height: 100px;
+  opacity: 0.4;
 }
 .button-login {
+  height: 40px;
+}
+.button-login-2 {
   height: 40px;
 }
 </style>

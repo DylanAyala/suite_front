@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "home_",
-
+  components: {},
   data() {
     return {
       userAuthenticated: false,
